@@ -1,15 +1,16 @@
 #!/bin/sh
 
-# fishをダウンロード
-brew install fish
+# powerline fontをインストール
+brew tap sanemat/font
+brew install ricty --with-powerline
 
-# fishをdefaultに設定
-if [ ! `cat /etc/shells | grep '/usr/local/bin/fish'` ] ; then
-  sudo -- sh -c "echo '/usr/local/bin/fish' >> /etc/shells"
-else
-  echo 'skip setup shells fish'
-fi
-chsh -s /usr/local/bin/fish
+cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+fc-cache -vf
 
-FISH_RESULT=`./fish/init.sh`
-# echo $FISH_RESULT
+FISH_RESULT=`./fish/install.sh`
+echo $FISH_RESULT
+
+# erlang をインストール
+brew install erlang
+brew install elixir-build
+brew install exenv
