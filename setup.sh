@@ -14,3 +14,9 @@ echo $FISH_RESULT
 brew install erlang
 brew install elixir-build
 brew install exenv
+
+# ruby をインストール
+brew install rbenv
+
+# node をインストール
+brew install nodenv
