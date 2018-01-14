@@ -20,3 +20,10 @@ brew install rbenv
 
 # node をインストール
 brew install nodenv
+
+# go をインストール
+brew install goenv
+
+# java をインストール
+brew tap caskroom/versions
+brew cask install java
