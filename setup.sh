@@ -10,20 +10,15 @@ fc-cache -vf
 FISH_RESULT=`./fish/install.sh`
 echo $FISH_RESULT
 
-# erlang をインストール
-brew install erlang
-brew install elixir-build
-brew install exenv
+# fzfをinstall
+brew install fzf
 
-# ruby をインストール
-brew install rbenv
-
-# node をインストール
-brew install nodenv
-
-# go をインストール
-brew install goenv
+# anyenvをinstall
+git clone https://github.com/riywo/anyenv ~/.anyenv
+anyenv install rbenv
+anyenv install nodenv
+anyenv install goenv
 
 # java をインストール
 brew tap caskroom/versions
-brew cask install java
+brew cask install java8

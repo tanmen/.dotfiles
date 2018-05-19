@@ -14,8 +14,6 @@ fisher fzf
 fisher edc/bass
 # (https://github.com/omf/theme-bobthefish)
 fisher omf/theme-bobthefish
-# (https://github.com/oh-my-fish/plugin-exenv)
-fisher oh-my-fish/plugin-exenv
 # nodeの補完が効く(https://github.com/oh-my-fish/plugin-node)
 # fisher oh-my-fish/plugin-node
 # gemの補完がきく(https://github.com/oh-my-fish/plugin-gem)
