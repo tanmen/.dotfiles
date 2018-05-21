@@ -22,3 +22,8 @@ anyenv install goenv
 # java をインストール
 brew tap caskroom/versions
 brew cask install java8
+
+# directory構成
+mkdir ~/Projects
+mkdir ~/Tools
+mkdir ~/Tmp
