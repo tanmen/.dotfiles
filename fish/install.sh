@@ -1,5 +1,6 @@
 #!/bin/sh
 # fishをインストール
+ROOT=$(cd $(dirname $0);pwd)
 brew install fish
 
 # fishをdefaultに設定
@@ -10,5 +11,5 @@ else
 fi
 chsh -s /usr/local/bin/fish
 
-FISH_RESULT=`./init.fish`
+FISH_RESULT=`$ROOT/init.fish`
 echo $FISH_RESULT

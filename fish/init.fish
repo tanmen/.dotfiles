@@ -18,3 +18,5 @@ fisher omf/theme-bobthefish
 # fisher oh-my-fish/plugin-node
 # gemの補完がきく(https://github.com/oh-my-fish/plugin-gem)
 fisher oh-my-fish/plugin-gem
+# nestしたssh_configを補完できるように
+fisher masa0x80/complete_ssh_host.fish

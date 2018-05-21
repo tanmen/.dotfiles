@@ -1,5 +1,7 @@
 #!/bin/sh
 
+ROOT=$(cd $(dirname $0);pwd)
+
 # powerline fontをインストール
 brew tap sanemat/font
 brew install ricty --with-powerline
@@ -7,7 +9,7 @@ brew install ricty --with-powerline
 cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
 fc-cache -vf
 
-FISH_RESULT=`./fish/install.sh`
+FISH_RESULT=`$ROOT/fish/install.sh`
 echo $FISH_RESULT
 
 # fzfをinstall
@@ -27,3 +29,10 @@ brew cask install java8
 mkdir ~/Projects
 mkdir ~/Tools
 mkdir ~/Tmp
+
+if [ -e ~/.gitconfig ]; then
+  rm ~/.gitconfig
+fi
+
+# gitの設定
+ln -s $ROOT/git/.gitconfig ~
