@@ -12,6 +12,9 @@ fc-cache -vf
 FISH_RESULT=`$ROOT/fish/install.sh`
 echo $FISH_RESULT
 
+# jqをinstall yarnのcompleteで必要
+brew install jq
+
 # fzfをinstall
 brew install fzf
 
