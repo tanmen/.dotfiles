@@ -16,3 +16,6 @@ set GEM_ROOT (ruby -e 'print Gem.user_dir')
 # java
 set -x JAVA_HOME (/usr/libexec/java_home)
 set -g fish_user_paths (string join / (/usr/libexec/java_home -v 1.8) bin) $fish_user_paths
+
+# openssl
+set -g fish_user_paths "/usr/local/opt/openssl/bin" $fish_user_paths
