@@ -22,6 +22,8 @@ brew install fzf
 
 # anyenvをinstall
 git clone https://github.com/riywo/anyenv ~/.anyenv
+mkdir -p $(anyenv root)/plugins
+git clone git:github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
 anyenv install rbenv
 anyenv install nodenv
 anyenv install goenv
