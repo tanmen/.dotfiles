@@ -2,9 +2,11 @@
 
 ROOT=$(cd $(dirname $0);pwd)
 
-# powerline fontをインストール
+# fontをインストール
 brew tap sanemat/font
 brew install ricty --with-powerline
+brew tap caskroom/fonts
+brew cask install font-fira-code
 
 cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
 fc-cache -vf
