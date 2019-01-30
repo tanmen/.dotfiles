@@ -19,3 +19,8 @@ set -g fish_user_paths (string join / (/usr/libexec/java_home -v 1.8) bin) $fish
 
 # openssl
 set -g fish_user_paths "/usr/local/opt/openssl/bin" $fish_user_paths
+set -gx LDFLAGS "-L/usr/local/opt/openssl/lib"
+set -gx CPPFLAGS "-I/usr/local/opt/openssl/include"
+
+# Tools
+set -g fish_user_paths $HOME/Tools/git-utils $fish_user_paths
