@@ -2,6 +2,14 @@
 
 ROOT=$(cd $(dirname $0);pwd)
 
+# brew install
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# install fish
+FISH_RESULT=`$ROOT/fish/install.sh`
+echo $FISH_RESULT
+exec $SHELL -l
+
 # fontをインストール
 brew tap sanemat/font
 brew install ricty --with-powerline
@@ -11,9 +19,6 @@ brew cask install font-fira-code
 cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
 fc-cache -vf
 
-FISH_RESULT=`$ROOT/fish/install.sh`
-echo $FISH_RESULT
-
 # jqをinstall yarnのcompleteで必要
 brew install jq
 
@@ -21,7 +26,7 @@ brew install jq
 brew install fzf
 
 # anyenvをinstall
-git clone https://github.com/riywo/anyenv ~/.anyenv
+brew install anyenv
 mkdir -p $(anyenv root)/plugins
 git clone git:github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
 anyenv install rbenv

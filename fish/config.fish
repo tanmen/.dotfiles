@@ -7,8 +7,7 @@ set -g fish_user_paths "/usr/local/opt/icu4c/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/icu4c/sbin" $fish_user_paths
 
 # anyenv
-set -g fish_user_paths $HOME/.anyenv/bin $fish_user_paths
-status --is-interactive; and source (anyenv init - fish|psub)
+status --is-interactive; and source (anyenv init -|psub)
 
 # rubyのalias
 set -gx GEM_ROOT (ruby -e 'print Gem.user_dir')
@@ -16,6 +15,11 @@ set -gx GEM_ROOT (ruby -e 'print Gem.user_dir')
 # java
 set -gx JAVA_HOME (/usr/libexec/java_home)
 set -g fish_user_paths (string join / (/usr/libexec/java_home -v 1.8) bin) $fish_user_paths
+
+# android
+set -gx ANDROID_HOME $HOME/Library/Android/sdk
+set -g fish_user_paths $ANDROID_HOME/tools $fish_user_paths
+set -g fish_user_paths $ANDROID_HOME/platform-tools $fish_user_paths
 
 # openssl
 set -g fish_user_paths "/usr/local/opt/openssl/bin" $fish_user_paths
