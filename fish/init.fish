@@ -9,7 +9,7 @@ ln -s ~/.dotfiles/fish/config.fish ~/.config/fish
 # (https://github.com/fisherman/z)
 fisher add jethrokuan/z
 # (https://github.com/fisherman/fzf)
-fisher add fzf
+fisher add jethrokuan/fzf
 # fishでもbashがうごくようにする(https://github.com/edc/bass)
 fisher add edc/bass
 # (https://github.com/omf/theme-bobthefish)

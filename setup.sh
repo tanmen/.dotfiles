@@ -50,4 +50,5 @@ ln -s $ROOT/git/.gitconfig ~
 # install fish
 FISH_RESULT=`$ROOT/fish/install.sh`
 echo $FISH_RESULT
+anyenv install --init
 exec $SHELL -l
