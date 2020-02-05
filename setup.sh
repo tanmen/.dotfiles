@@ -32,6 +32,7 @@ git clone git:github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-upd
 anyenv install rbenv
 anyenv install nodenv
 anyenv install goenv
+git clone https://github.com/nodenv/jetbrains-npm (nodenv root)/plugins/jetbrains-npm
 
 # java をインストール
 brew tap caskroom/versions
