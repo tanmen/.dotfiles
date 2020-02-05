@@ -7,7 +7,7 @@ curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fi
 ln -s ~/.dotfiles/fish/config.fish ~/.config/fish
 
 # (https://github.com/fisherman/z)
-fisher add z
+fisher add jethrokuan/z
 # (https://github.com/fisherman/fzf)
 fisher add fzf
 # fishでもbashがうごくようにする(https://github.com/edc/bass)
