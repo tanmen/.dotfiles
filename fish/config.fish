@@ -32,6 +32,3 @@ set -g fish_user_paths "/usr/local/opt/mysql-client@5.7/bin" $fish_user_paths
 set -gx LDFLAGS "-L/usr/local/opt/mysql-client@5.7/lib" $LDFLAGS
 set -gx CPPFLAGS "-I/usr/local/opt/mysql-client@5.7/include" $CPPFLAGS
 set -gx PKG_CONFIG_PATH "/usr/local/opt/mysql-client@5.7/lib/pkgconfig" $PKG_CONFIG_PATH
-
-# Tools
-set -g fish_user_paths $HOME/Tools/git-utils $fish_user_paths

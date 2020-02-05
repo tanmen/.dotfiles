@@ -13,6 +13,6 @@ fisher add fzf
 # fishでもbashがうごくようにする(https://github.com/edc/bass)
 fisher add edc/bass
 # (https://github.com/omf/theme-bobthefish)
-fisher add omf/theme-bobthefish
+fisher add oh-my-fish/theme-bobthefish
 # nestしたssh_configを補完できるように
 fisher add masa0x80/complete_ssh_host.fish

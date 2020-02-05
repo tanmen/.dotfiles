@@ -3,17 +3,18 @@
 ROOT=$(cd $(dirname $0);pwd)
 
 # brew install
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if [ ! $(which brew) ]; then
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
-# install fish
-FISH_RESULT=`$ROOT/fish/install.sh`
-echo $FISH_RESULT
-exec $SHELL -l
+# java をインストール
+brew tap homebrew/cask-versions
+brew cask install adoptopenjdk8
 
 # fontをインストール
 brew tap sanemat/font
 brew install ricty --with-powerline
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 brew cask install font-fira-code
 
 cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
@@ -32,11 +33,7 @@ git clone git:github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-upd
 anyenv install rbenv
 anyenv install nodenv
 anyenv install goenv
-git clone https://github.com/nodenv/jetbrains-npm (nodenv root)/plugins/jetbrains-npm
-
-# java をインストール
-brew tap caskroom/versions
-brew cask install java8
+git clone https://github.com/nodenv/jetbrains-npm $(nodenv root)/plugins/jetbrains-npm
 
 # directory構成
 mkdir ~/Projects
@@ -49,3 +46,8 @@ fi
 
 # gitの設定
 ln -s $ROOT/git/.gitconfig ~
+
+# install fish
+FISH_RESULT=`$ROOT/fish/install.sh`
+echo $FISH_RESULT
+exec $SHELL -l
