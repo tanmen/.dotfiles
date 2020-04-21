@@ -11,6 +11,10 @@ fi
 brew tap homebrew/cask-versions
 brew cask install adoptopenjdk8
 
+# gpg
+brew install gpg
+brew cask install gpg-suite-no-mail
+
 # fontをインストール
 brew tap sanemat/font
 brew install ricty --with-powerline
@@ -46,6 +50,10 @@ fi
 
 # gitの設定
 ln -s $ROOT/git/.gitconfig ~
+
+# gpgの設定
+rm ~/.gnupg/gpg-agent.conf
+ln -s $ROOT/gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 
 # install fish
 FISH_RESULT=`$ROOT/fish/install.sh`

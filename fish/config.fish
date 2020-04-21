@@ -1,5 +1,8 @@
 # color
-export LSCOLORS=gxfxcxdxbxegedabagacad
+set -gx LSCOLORS gxfxcxdxbxegedabagacad
+
+# gpg
+set -gx GPG_TTY (tty)
 
 # gettext
 set -g fish_user_paths "/usr/local/opt/gettext/bin" $fish_user_paths
@@ -39,3 +42,6 @@ set -gx PKG_CONFIG_PATH "/usr/local/opt/mysql-client@5.7/lib/pkgconfig" $PKG_CON
 # go
 set -g fish_user_paths $GOROOT/bin $fish_user_paths
 set -g fish_user_paths $GOPATH/bin $fish_user_paths
+
+# sbin
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths

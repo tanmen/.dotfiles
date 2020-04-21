@@ -9,3 +9,7 @@
 	UseHttpPath = true
 [branch "master"]
 	rebase = true
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = true
