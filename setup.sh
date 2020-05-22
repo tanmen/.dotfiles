@@ -8,8 +8,7 @@ if [ ! $(which brew) ]; then
 fi
 
 # java をインストール
-brew tap homebrew/cask-versions
-brew cask install adoptopenjdk8
+brew cast install java
 
 # gpg
 brew install gpg
