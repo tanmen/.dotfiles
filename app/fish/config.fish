@@ -15,6 +15,9 @@ set -gx GOENV_GOPATH_PREFIX $HOME/.go
 # anyenv
 status --is-interactive; and source (anyenv init -|psub)
 
+# rustup
+set -g fish_user_paths $HOME/.cargo/bin $fish_user_paths
+
 # rubyのalias
 set -gx GEM_ROOT (ruby -e 'print Gem.user_dir')
 

@@ -1,4 +1,8 @@
 #!/bin/sh
-cd ~/
-git clone https://github.com/tanmen/.dotfiles.git
-bash .dotfiles/setup.sh
+cd ~ || exit
+
+if [ ! -d ~/.dotfiles ]; then
+  git clone https://github.com/tanmen/.dotfiles.git
+fi
+
+sh .dotfiles/setup.sh
