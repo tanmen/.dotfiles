@@ -34,3 +34,10 @@ if [[ ! $(mas list | grep -E "^1274495053\s") ]]; then
 else
   mas upgrade 1274495053
 fi
+
+# Skitch
+if [[ ! $(mas list | grep -E "^425955336\s") ]]; then
+  mas install 425955336
+else
+  mas upgrade 425955336
+fi
