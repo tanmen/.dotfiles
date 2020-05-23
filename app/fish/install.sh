@@ -27,7 +27,7 @@ else
   echo 'skip setup shells fish'
 fi
 
-if [ ! -L ~/.config/fish/config.fish ] || [[ -n $(find -L ~/.config/fish/config.fish -type l) ]]; then
+if [ ! -e ~/.config/fish/config.fish ] || [ ! -L ~/.config/fish/config.fish ] || [[ -n $(find -L ~/.config/fish/config.fish -type l) ]]; then
   rm -f ~/.config/fish/config.fish
   ln -s $SCRIPT_DIR/config.fish ~/.config/fish/config.fish
 fi
