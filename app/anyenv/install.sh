@@ -7,6 +7,8 @@ else
   brew upgrade anyenv
 fi
 
+eval "$(anyenv init -)"
+
 if [ ! -d $(anyenv root)/plugins ]; then
   mkdir -p $(anyenv root)/plugins
 else
@@ -38,6 +40,8 @@ fi
 if [[ ! $(anyenv version | grep -E "^goenv:") ]]; then
   anyenv install goenv
 fi
+
+eval "$(anyenv init -)"
 
 if [ ! -d $(nodenv root)/plugins/jetbrains-npm ]; then
   git clone https://github.com/nodenv/jetbrains-npm $(nodenv root)/plugins/jetbrains-npm

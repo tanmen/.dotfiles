@@ -3,7 +3,7 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
 # brew install
 if [ ! $(which brew) ]; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 # directory構成
@@ -16,6 +16,8 @@ fi
 if [ ! -d ~/Tmp ]; then
   mkdir ~/Tmp
 fi
+
+sudo xcodebuild -license accept
 
 sh $SCRIPT_DIR/app/setup.sh
 
