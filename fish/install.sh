@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Start install fish"
 
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
+DIR=$(cd $(dirname $0); pwd)
 
 if [ ! $(brew list | grep -E "^fish\$") ]; then
   brew install fish
@@ -29,8 +29,8 @@ fi
 
 if [ ! -e ~/.config/fish/config.fish ] || [ ! -L ~/.config/fish/config.fish ] || [[ -n $(find -L ~/.config/fish/config.fish -type l) ]]; then
   rm -f ~/.config/fish/config.fish
-  ln -s $SCRIPT_DIR/config.fish ~/.config/fish/config.fish
+  ln -s $DIR/config.fish ~/.config/fish/config.fish
 fi
 
-fish $SCRIPT_DIR/init.fish
+fish $DIR/init.fish
 

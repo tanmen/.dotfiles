@@ -1,5 +1,5 @@
 #!/bin/sh
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
+DIR=$(cd $(dirname $0); pwd)
 
 # brew install
 if [ ! $(which brew) ]; then
@@ -17,8 +17,12 @@ if [ ! -d ~/Tmp ]; then
   mkdir ~/Tmp
 fi
 
-sudo xcodebuild -license accept
+if [ ! -e /Library/Developer/CommandLineTools ]; then
+  sudo xcodebuild -license accept
+fi
 
-sh $SCRIPT_DIR/app/setup.sh
+sh $DIR/fish/install.sh
+
+fish $DIR/app/setup.fish
 
 exec $SHELL -l
