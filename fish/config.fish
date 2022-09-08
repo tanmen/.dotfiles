@@ -23,7 +23,7 @@ set -gx GEM_ROOT (ruby -e 'print Gem.user_dir')
 
 # java
 set -gx JAVA_HOME (/usr/libexec/java_home)
-set -g fish_user_paths (string join / (/usr/libexec/java_home -v 14) bin) $fish_user_paths
+set -g fish_user_paths (string join / (/usr/libexec/java_home -v 17) bin) $fish_user_paths
 
 # android
 set -gx ANDROID_HOME $HOME/Library/Android/sdk
