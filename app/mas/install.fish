@@ -21,13 +21,6 @@ else
   mas upgrade 975937182
 end
 
-# Spark
-if not mas list | grep -E "^1176895641\s"
-  mas install 1176895641
-else
-  mas upgrade 1176895641
-end
-
 # Microsoft To Do
 if not mas list | grep -E "^1274495053\s"
   mas install 1274495053

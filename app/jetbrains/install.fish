@@ -2,5 +2,5 @@
 echo (set_color blue)           Start install jetbrains(set_color normal)
 
 if [ ! -e /Applications/JetBrains\ Toolbox.app ]
-  brew cask install jetbrains-toolbox
+  brew install --cask jetbrains-toolbox
 end

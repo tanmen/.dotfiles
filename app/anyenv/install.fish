@@ -25,26 +25,9 @@ if [ ! -d ~/.config/anyenv/anyenv-install ]
   anyenv install --init
 end
 
-if not anyenv version | grep -E "^exenv:"
-  anyenv install exenv
-end
-
-if not anyenv version | grep -E "^rbenv:"
-  anyenv install rbenv
-end
-
 if not anyenv version | grep -E "^nodenv:"
   anyenv install nodenv
-end
-
-if not anyenv version | grep -E "^goenv:"
-  anyenv install goenv
+  echo 'yarn' > (anyenv root)/envs/nodenv/default-packages
 end
 
 status --is-interactive; and source (anyenv init -|psub)
-
-if [ ! -d (nodenv root)/plugins/jetbrains-npm ]
-  git clone https://github.com/nodenv/jetbrains-npm (nodenv root)/plugins/jetbrains-npm
-else
-  echo "(nodenv root)/plugins/jetbrains-npm already exists"
-end

@@ -1,6 +1,7 @@
 [user]
 	name = tanmen
 	email = yt.prog@gmail.com
+	signingkey = AEFCD8B9
 
 [alias]
   co = checkout
