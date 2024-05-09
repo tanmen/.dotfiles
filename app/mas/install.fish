@@ -33,11 +33,11 @@ if not mas list | grep -E "^425955336\s"
   mas install 425955336
 else
   mas upgrade 425955336
-fi
+end
 
 # Slack
-if [[ ! $(mas list | grep -E "^803453959\s") ]]; then
+if not mas list | grep -E "^803453959\s"
   mas install 803453959
 else
   mas upgrade 803453959
-fi
+end

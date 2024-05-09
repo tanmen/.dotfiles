@@ -37,3 +37,6 @@ set -gx PKG_CONFIG_PATH "/usr/local/opt/mysql-client@5.7/lib/pkgconfig" $PKG_CON
 
 # sbin
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+
+# customs
+set -g fish_user_paths "$HOME/.bin" $fish_user_paths

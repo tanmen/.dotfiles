@@ -15,3 +15,7 @@ if [ ! -L ~/.gitconfig ] || [ -n "$INVALID_LINK" ]
   rm -f ~/.gitconfig
   ln -s $DIR/.gitconfig ~/.gitconfig
 end
+
+if  ! test -e ~/.bin/git-delete-merged 
+  git clone git@github.com:tanmen/git-utils.git ~/.bin
+end
