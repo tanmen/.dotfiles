@@ -2,11 +2,13 @@
 # Apple Silicon (/opt/homebrew) と Intel (/usr/local) のどちらでも動くよう
 # パスは brew --prefix から動的に解決する。
 #
-# 2フェーズ実行をサポートする。
-#   - DOTFILES_PHASE=ask : 未インストール項目を最初に全て質問。答えを $DOTFILES_ANSWERS に追記。
-#                          install/symlink などの実行系アクションは一切しない。
-#   - DOTFILES_PHASE=run : ask で集めた答えに従ってインストール実施。確認は一切出さない。
-#   - 未セット           : 個別の install.fish を単体実行している扱い。従来通り対話。
+# Phase:
+#   ask  : 質問だけ集める。実行系は一切しない。
+#   run  : 質問なしで実行。
+#   未設定: 単体実行（従来の対話）。
+#
+# アプリインストール (brew/cask/mas) は setup.sh が最初に一括質問する
+# 「app をインストールしますか？」の答え (DOTFILES_INSTALL_APPS) に従う。
 
 function dot_brew_prefix
     if test -d /opt/homebrew
@@ -27,7 +29,6 @@ end
 function dot_confirm
     set -l q $argv[1]
     if dot_phase_is_ask
-        # 同じ質問を何度も聞かない
         if set -q DOTFILES_ASKED; and test -f $DOTFILES_ASKED; and grep -Fxq "$q" $DOTFILES_ASKED
             return 1
         end
@@ -43,7 +44,6 @@ function dot_confirm
                 echo "$q" >> $DOTFILES_ANSWERS
             end
         end
-        # ask フェーズではどんな答えでも実行系は走らせない
         return 1
     end
     if dot_phase_is_run
@@ -52,7 +52,6 @@ function dot_confirm
         end
         return 1
     end
-    # 単体実行
     if not isatty stdin
         echo "  [skip] $q (非対話シェル)"
         return 1
@@ -62,7 +61,6 @@ function dot_confirm
 end
 
 function dot_ensure_symlink
-    # ask フェーズでは何もしない
     if dot_phase_is_ask
         return 0
     end
@@ -77,26 +75,28 @@ function dot_ensure_symlink
     end
 end
 
-function dot_brew_install
-    set -l pkg $argv[1]
-    set -l display $pkg
-    if set -q argv[2]
-        set display $argv[2]
-    end
-    set -l installed 0
-    if brew list --formula 2>/dev/null | grep -qE "^$pkg\$"
-        set installed 1
+# アプリ install を実行してよいか
+# run フェーズ → DOTFILES_INSTALL_APPS が立っていれば許可
+# 単体実行    → 常に許可（個別実行は意思表示とみなす）
+function dot_apps_allowed
+    if dot_phase_is_run
+        set -q DOTFILES_INSTALL_APPS
+        return $status
     end
     if dot_phase_is_ask
-        # 質問だけ。既存なら何も聞かない。
-        if test $installed -eq 0
-            dot_confirm "$display をインストールしますか？" >/dev/null
-        end
+        return 1
+    end
+    return 0
+end
+
+function dot_brew_install
+    set -l pkg $argv[1]
+    if dot_phase_is_ask
         return 0
     end
-    if test $installed -eq 1
+    if brew list --formula 2>/dev/null | grep -qE "^$pkg\$"
         brew upgrade $pkg 2>/dev/null
-    else if dot_confirm "$display をインストールしますか？"
+    else if dot_apps_allowed
         brew install $pkg
     end
 end
@@ -104,12 +104,11 @@ end
 function dot_brew_cask_install
     set -l cask $argv[1]
     set -l app_path ""
-    set -l display $cask
     if set -q argv[2]
         set app_path $argv[2]
     end
-    if set -q argv[3]
-        set display $argv[3]
+    if dot_phase_is_ask
+        return 0
     end
     set -l installed 0
     if test -n "$app_path"; and test -e "$app_path"
@@ -117,35 +116,20 @@ function dot_brew_cask_install
     else if brew list --cask 2>/dev/null | grep -qE "^$cask\$"
         set installed 1
     end
-    if dot_phase_is_ask
-        if test $installed -eq 0
-            dot_confirm "$display をインストールしますか？" >/dev/null
-        end
-        return 0
-    end
-    if test $installed -eq 0
-        if dot_confirm "$display をインストールしますか？"
-            brew install --cask $cask
-        end
+    if test $installed -eq 0; and dot_apps_allowed
+        brew install --cask $cask
     end
 end
 
 function dot_mas_install
     set -l id $argv[1]
-    set -l name $argv[2]
-    set -l installed 0
-    if mas list 2>/dev/null | grep -qE "^$id\s"
-        set installed 1
-    end
     if dot_phase_is_ask
-        if test $installed -eq 0
-            dot_confirm "$name (App Store) をインストールしますか？" >/dev/null
-        end
         return 0
     end
-    if test $installed -eq 0
-        if dot_confirm "$name (App Store) をインストールしますか？"
-            mas install $id
-        end
+    if mas list 2>/dev/null | grep -qE "^$id\s"
+        return 0
+    end
+    if dot_apps_allowed
+        mas install $id
     end
 end

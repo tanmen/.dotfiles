@@ -3,10 +3,10 @@ echo "Start install fish"
 
 DIR=$(cd "$(dirname "$0")"; pwd)
 
-# 2フェーズ実行（詳しくは app/lib.fish の冒頭コメント参照）。
 phase_is_ask() { [ "$DOTFILES_PHASE" = "ask" ]; }
 phase_is_run() { [ "$DOTFILES_PHASE" = "run" ]; }
 
+# /etc/shells 登録など、フラグに紐づかない個別質問用。
 confirm() {
   q=$1
   if phase_is_ask; then
@@ -33,14 +33,13 @@ confirm() {
   return 1
 }
 
-brew_install() {
+# fish 環境構築に必須なため、確認なしで install / upgrade する。
+brew_ensure() {
   pkg=$1
   if brew list --formula 2>/dev/null | grep -qE "^${pkg}\$"; then
     phase_is_ask && return 0
     brew upgrade "$pkg" 2>/dev/null || true
-  elif phase_is_ask; then
-    confirm "$pkg をインストールしますか？" || true
-  elif confirm "$pkg をインストールしますか？"; then
+  elif ! phase_is_ask; then
     brew install "$pkg"
   fi
 }
@@ -56,9 +55,9 @@ ensure_link() {
   fi
 }
 
-brew_install fish
-brew_install jq
-brew_install fzf
+brew_ensure fish
+brew_ensure jq
+brew_ensure fzf
 
 # fish のパスは Apple Silicon (/opt/homebrew) と Intel (/usr/local) で異なるため動的に解決。
 FISH=$(command -v fish)
