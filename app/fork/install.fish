@@ -1,6 +1,7 @@
-#!/usr/local/bin/fish
-echo (set_color blue)           Start install fork(set_color normal)
+#!/usr/bin/env fish
+echo (set_color blue)"          Start install fork"(set_color normal)
 
-if [ ! -e /Applications/Fork.app ]
-  brew install --cask fork
-end
+set DIR (dirname (status --current-filename))
+source $DIR/../lib.fish
+
+dot_brew_cask_install fork /Applications/Fork.app Fork

@@ -1,6 +1,7 @@
-#!/usr/local/bin/fish
-echo (set_color blue)           Start install vscode(set_color normal)
+#!/usr/bin/env fish
+echo (set_color blue)"          Start install vscode"(set_color normal)
 
-if [ ! -e /Applications/Visual\ Studio\ Code.app ]
-  brew install --cask visual-studio-code
-end
+set DIR (dirname (status --current-filename))
+source $DIR/../lib.fish
+
+dot_brew_cask_install visual-studio-code /Applications/Visual\ Studio\ Code.app "Visual Studio Code"

@@ -1,21 +1,14 @@
-#!/usr/local/bin/fish
-echo (set_color blue)           Start install git(set_color normal)
+#!/usr/bin/env fish
+echo (set_color blue)"          Start install git"(set_color normal)
 
 set DIR (dirname (status --current-filename))
+source $DIR/../lib.fish
 
-if not brew list | grep -E "^git\$"
-  brew install git
-else
-  brew upgrade git
-end
+dot_brew_install git
+dot_ensure_symlink $DIR/.gitconfig ~/.gitconfig
 
-set -l INVALID_LINK (find -L ~/.gitconfig -type l)
-# gitの設定
-if [ ! -L ~/.gitconfig ] || [ -n "$INVALID_LINK" ]
-  rm -f ~/.gitconfig
-  ln -s $DIR/.gitconfig ~/.gitconfig
-end
-
-if  ! test -e ~/.bin/git-delete-merged 
-  git clone git@github.com:tanmen/git-utils.git ~/.bin
+if not test -e ~/.bin/git-delete-merged
+    if dot_confirm "git-utils (tanmen/git-utils) を ~/.bin に clone しますか？"
+        git clone git@github.com:tanmen/git-utils.git ~/.bin
+    end
 end

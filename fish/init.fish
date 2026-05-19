@@ -1,33 +1,31 @@
-#!/usr/local/bin/fish
+#!/usr/bin/env fish
 
-# fishのpackage managerをインストール
+set DIR (dirname (status --current-filename))
+test -f $DIR/../app/lib.fish; and source $DIR/../app/lib.fish
+
+# ask フェーズでは fisher / プラグインの取得は行わない（質問対象外）。
+# run フェーズ or 単体実行で fish が利用可能になっている前提で動かす。
+if dot_phase_is_ask 2>/dev/null
+    exit 0
+end
+
+# fisher (https://github.com/jorgebucaran/fisher)
+# git.io はシャットダウン済みのため GitHub の raw URL を参照する。
 if not functions -q fisher
-  set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-  curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
-  fish -c fisher
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+    fisher install jorgebucaran/fisher
 end
 
-# (https://github.com/fisherman/z)
-if not fisher ls fisherman.z
-  fisher install fisherman/z
-end
+# fisherman organization は解散済み。後継の org/repo に置き換え。
+set -l plugins \
+    jethrokuan/z \
+    patrickf1/fzf.fish \
+    edc/bass \
+    oh-my-fish/theme-bobthefish \
+    masa0x80/complete_ssh_host.fish
 
-# (https://github.com/fisherman/fzf)
-if not fisher ls fisherman.fzf
-  fisher install fisherman/fzf
-end
-
-# fishでもbashがうごくようにする(https://github.com/edc/bass)
-if not fisher ls edc.bass
-  fisher install edc/bass
-end
-
-# (https://github.com/omf/theme-bobthefish)
-if not fisher ls oh-my-fish.theme-bobthefish
-  fisher install oh-my-fish/theme-bobthefish
-end
-
-# nestしたssh_configを補完できるように
-if not fisher ls masa0x80.complete_ssh_host.fish
-  fisher install masa0x80/complete_ssh_host.fish
+for p in $plugins
+    if not fisher list | grep -qE "^$p\$"
+        fisher install $p
+    end
 end

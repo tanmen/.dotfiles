@@ -1,16 +1,13 @@
 [user]
 	name = tanmen
 	email = yt.prog@gmail.com
-	signingkey = AEFCD8B9
+	signingkey = ~/.ssh/id_rsa.pub
 
 [alias]
-  co = checkout
-[credential]
-	helper = !aws codecommit credential-helper $@
-	UseHttpPath = true
-[branch "master"]
+	co = checkout
+[pull]
 	rebase = true
 [gpg]
-	program = gpg
+	format = ssh
 [commit]
 	gpgsign = true

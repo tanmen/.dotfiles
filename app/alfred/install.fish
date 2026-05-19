@@ -1,6 +1,7 @@
-#!/usr/local/bin/fish
-echo (set_color blue)           Start install alfred(set_color normal)
+#!/usr/bin/env fish
+echo (set_color blue)"          Start install alfred"(set_color normal)
 
-if [ ! -e /Applications/Alfred\ 5.app ]
-  brew install --cask alfred
-end
+set DIR (dirname (status --current-filename))
+source $DIR/../lib.fish
+
+dot_brew_cask_install alfred /Applications/Alfred\ 5.app Alfred

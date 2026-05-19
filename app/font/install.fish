@@ -1,7 +1,8 @@
-#!/usr/local/bin/fish
-echo (set_color blue)           Start install font(set_color normal)
+#!/usr/bin/env fish
+echo (set_color blue)"          Start install font"(set_color normal)
 
-if not brew list --cask | grep -E "^font-fira-mono-for-powerline\$"
-  brew tap homebrew/cask-fonts
-  brew install --cask font-fira-mono-for-powerline
-end
+set DIR (dirname (status --current-filename))
+source $DIR/../lib.fish
+
+# homebrew/cask-fonts は 2024 に homebrew/cask 本体に統合済みなので tap 不要。
+dot_brew_cask_install font-fira-mono-for-powerline "" "Fira Mono for Powerline (font)"
