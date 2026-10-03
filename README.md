@@ -5,7 +5,7 @@ macOS 用個人 dotfiles。Apple Silicon / Intel どちらでも動作する。
 ## Get Started
 
 ```sh
-curl https://raw.githubusercontent.com/tanmen/.dotfiles/master/install.sh | sh
+curl https://raw.githubusercontent.com/tanmen/.dotfiles/main/install.sh | sh
 ```
 
 ## 構成
